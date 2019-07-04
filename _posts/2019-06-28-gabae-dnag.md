@@ -11,4 +11,4 @@ redirect_from:
 #### GaBae-Dang is café in Haeng-Gung-Dong, Suwon.
 #### It was So good. :>
 
-![coffee_and_scone](/post_image/coffee_gabaedang.jpg “coffee&scone”) 
+![coffee_and_scone](/post_image/coffee_gabaedang.jpg) 
