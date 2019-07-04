@@ -3,7 +3,7 @@ layout: post
 title: "GaBae-Dang"
 description: "Wony's first post at Haeng-Gung-Dong"
 categories: [café]
-tags: [life, coffee, café]
+tags: [life, café]
 redirect_from:
   - /2019/06/28/
 ---
