@@ -7,8 +7,8 @@ tags: [life, coffee, café]
 redirect_from:
   - /2019/06/28/
 ---
-####Hello Everyone!
-####GaBae-Dang is café in Haeng-Gung-Dong, Suwon.
-####It was So good. :>
+#### Hello Everyone!
+#### GaBae-Dang is café in Haeng-Gung-Dong, Suwon.
+#### It was So good. :>
 
 ![coffee_and_scone](/post_image/coffee_gabaedang.jpg “coffee&scone”) 
