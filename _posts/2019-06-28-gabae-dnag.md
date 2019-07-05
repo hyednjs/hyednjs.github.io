@@ -4,6 +4,7 @@ title: "GaBae-Dang"
 description: "Wony's first post at Haeng-Gung-Dong"
 categories: [café]
 tags: [life, café]
+comments: true
 redirect_from:
   - /2019/06/28/
 ---
