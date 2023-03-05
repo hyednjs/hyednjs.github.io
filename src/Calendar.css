@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     color: white;
-    margin-top: 5%;
+    margin-top: 3%;
 }
 
 .day-picker {
@@ -28,7 +28,7 @@
 }
 
 .rdp {
-    --rdp-cell-size: 50px;
+    --rdp-cell-size: 43px;
     --rdp-caption-font-size: 20px;
     --rdp-accent-color: #ffaa00;
     --rdp-background-color: #ffaa00;
