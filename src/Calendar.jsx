@@ -30,6 +30,7 @@ function Calendar() {
             new Date(2023, 2, 5),
         ]
     }
+
     const specialDayStyle = {
         metDays : {
             border:"solid 2px #ffaa00",
@@ -69,10 +70,11 @@ function Calendar() {
 
     return (
         <div className="main">
-            <h1>🧡</h1>
+            <h1>🧞 🤍 👸🏼</h1>
             <div className="day-picker">
                 <DayPicker
                     mode="single"
+                    captionLayout="dropdown-buttons"
                     onDayClick={handleDayClick}
                     // selectedDays={selectedDay}
                     disabled={disableDays}

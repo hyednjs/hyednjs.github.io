@@ -41,7 +41,7 @@
   }
 
 .rdp-nav_button {
---rdp-background-color: none;
+    --rdp-background-color: none;
 }
 
 .rdp-day {
@@ -52,4 +52,4 @@
     font-weight: bold;
     text-underline-offset: 5px;
     text-decoration: underline;
-  }
+}
