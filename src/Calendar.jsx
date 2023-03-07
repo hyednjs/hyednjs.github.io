@@ -6,7 +6,8 @@ import 'react-day-picker/dist/style.css';
 import './Calendar.css'
 
 function Calendar() {
-    
+    const isSessionValid = window.sessionStorage.getItem('is_session_valid');
+
     const disableDays = [
         new Date(2023, 1, 1),
         new Date(2023, 1, 2),
@@ -28,7 +29,7 @@ function Calendar() {
             new Date(2023, 1, 28),
             new Date(2023, 2, 1),
             new Date(2023, 2, 5),
-            new Date(2023, 2, 7),
+            new Date(2023, 2, 8),
         ]
     }
 
@@ -68,6 +69,13 @@ function Calendar() {
         if (date.getMonth() === 1 && date.getDate() === 10) return true;
         return false
     }
+
+    useEffect(() => {
+        if(isSessionValid !== 'true') {
+            window.location.reload();
+            window.sessionStorage.setItem('is_session_valid', 'true');
+        }
+    },[])
 
     return (
         <div className="main">
