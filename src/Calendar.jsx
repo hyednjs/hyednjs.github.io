@@ -28,12 +28,13 @@ function Calendar() {
             new Date(2023, 1, 28),
             new Date(2023, 2, 1),
             new Date(2023, 2, 5),
+            new Date(2023, 2, 7),
         ]
     }
 
     const specialDayStyle = {
         metDays : {
-            border:"solid 2px #ffaa00",
+            border:"solid 1px #ffaa00",
             borderRadius:'50%',
         },
     }
