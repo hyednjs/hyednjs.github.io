@@ -27,6 +27,12 @@
     color: #ffaa00;
 }
 
+.date-checkbox-container {
+    align-items: center;
+    
+    color: white;
+}
+
 .rdp {
     --rdp-cell-size: 43px;
     --rdp-caption-font-size: 20px;
