@@ -4,14 +4,23 @@ const apiUrl = "http://125.130.84.184:5000"
 // const apiUrl = "http://127.0.0.1:5000";
 
 // get my date days
-function getMyDateDays(db_name, month) {
-    return axios.get(apiUrl + "/get_my_date_days" , {
+function getMyDateDays(monthKey) {
+    return axios.get(apiUrl + "/get_my_dating_list" , {
         params : {
-            dbname : db_name,
+            month : monthKey,
         }
     })
     .then((response) => {
-        return response.data[0][0];
+        let responseData = response.data[0];
+
+        if(Object.keys(responseData).length === 0) {
+            let year = monthKey.split('-')[0];
+            let month = monthKey.split('-')[1];
+            let emptyMonthStr = '0'.repeat(new Date(year, month, 0).getDate());
+            return emptyMonthStr;
+        } else {
+            return responseData[0];
+        }
     })
     .catch((error) => {
         console.log('err', error);
@@ -19,12 +28,11 @@ function getMyDateDays(db_name, month) {
 }
 
 // set my date days
-function setMyDateDays(db_name, month, my_date_days) {
-    return axios.post(apiUrl + "/set_my_date_days", null, {
+function setMyDateDays(month, my_dating_days) {
+    return axios.post(apiUrl + "/set_my_dating_day", null, {
         params : {
-            dbname : db_name,
             month: month,
-            my_date_days : my_date_days
+            my_dating_days : my_dating_days
         }
     })
     .then((response) => {
