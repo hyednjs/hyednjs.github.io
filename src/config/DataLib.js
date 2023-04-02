@@ -43,7 +43,46 @@ function setMyDateDays(month, my_dating_days) {
     });
 }
 
+// get my date memo
+function getMyDateMemo(date) {
+    return axios.get(apiUrl + "/get_my_dating_memo" , {
+        params : {
+            date : date,
+        }
+    })
+    .then((response) => {
+        let responseData = response.data[0][0];
+        if (responseData === undefined) {
+            responseData = ""
+        }
+
+        return responseData;
+    })
+    .catch((error) => {
+        console.log('err', error);
+    });
+}
+
+// set my date memo
+function setMyDateMemo(date, my_dating_memo) {
+    return axios.post(apiUrl + "/set_my_dating_memo", null, {
+        params : {
+            date: date,
+            my_dating_memo : my_dating_memo
+        }
+    })
+    .then((response) => {
+        console.log(response.data[0])
+        return response.data[0];
+    })
+    .catch((error) => {
+        console.log('err', error);
+    });
+}
+
 export default {
     getMyDateDays,
     setMyDateDays,
+    getMyDateMemo,
+    setMyDateMemo
 };

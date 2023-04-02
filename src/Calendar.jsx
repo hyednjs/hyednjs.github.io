@@ -9,6 +9,9 @@ import Checkbox from '@mui/material/Checkbox';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import SaveIcon from '@mui/icons-material/Save';
 
 function Calendar() {
 
@@ -16,6 +19,7 @@ function Calendar() {
     const [isCheckedYes, setIsCheckedYes] = useState("no");
     const [isDatingDayString, setIsDatingDayString] = useState("");
     const [isDatingDayList, setIsDatingDayList] = useState([]);
+    const [datingMemo, setDatingDayMemo] = useState("");
 
     const disableDays = [
         {from: new Date(2023, 1, 1), to: new Date(2023, 1, 9)}
@@ -57,10 +61,20 @@ function Calendar() {
     function handleDayClick(date,  {selected}) {
         if(selected === undefined) {
             setSelectedDay(date);
+            setDatingDayMemo("");
             if(isDatingDayList.some(day => (date.toDateString() === day.toDateString()))) {
                 setIsCheckedYes("yes");
+                DataLib.getMyDateMemo(makeDateToString(date))
+                    .then((data) => {
+                        setDatingDayMemo(data)
+                    })
+                    .catch((error) => {
+                        console.log('err', error);
+                        setDatingDayMemo("");
+                    });
             } else {
                 setIsCheckedYes("no");
+                setDatingDayMemo("");
             }
         }
     }
@@ -116,6 +130,8 @@ function Calendar() {
         let dayDiff = getDiffDays(date);
         if (dayDiff % 100 === 0) return true;
         if (date.getMonth() === 1 && date.getDate() === 10) return true;
+        if (date.getMonth() === 10 && date.getDate() === 15) return true;
+        if (date.getMonth() === 9 && date.getDate() === 28) return true;
         return false
     }
 
@@ -130,6 +146,21 @@ function Calendar() {
         let newDatingDayString = isDatingDayString.substring(0,targetIndex) + isCheckedYesToInt + isDatingDayString.substring(targetIndex+1);
 
         DataLib.setMyDateDays(makeDateToString(selectedDay).slice(0,7), newDatingDayString)
+            .then((data) => {
+                if (data["msg"] === 'success') {
+                    alert('저장이 완료되었습니다.');
+                    window.location.reload();
+                } else {
+                    alert('저장에 실패했습니다.');
+                }
+            })
+            .catch((error) => {
+                console.log('err', error);
+            });
+    }
+
+    function onTextSaveButton() {
+        DataLib.setMyDateMemo(makeDateToString(selectedDay), datingMemo)
             .then((data) => {
                 if (data["msg"] === 'success') {
                     alert('저장이 완료되었습니다.');
@@ -163,11 +194,12 @@ function Calendar() {
             </div>
             <div className="calendar-contents">
                 {
-                    selectedDay === "" ? 
+                    selectedDay === "" ?
                     <span>[ TODAY ]<br/>
                         <span>
                             <b id="d-day">{getDiffDays(new Date())}</b> 일
                             {isAnniversaryDay(new Date()) && <span> 🎉</span>}
+                            {(isCheckedYes === "yes") && !isAnniversaryDay(selectedDay) && <span> 🧡</span>}
                         </span>
                     </span>
                     :
@@ -175,8 +207,13 @@ function Calendar() {
                         <span>
                             <b id="d-day">{getDiffDays(selectedDay)}</b> 일
                             {isAnniversaryDay(selectedDay) && <span> 🎉</span>}
-                        </span><br/>
-                        {/* <FormControlLabel id="checkbox" control={<Checkbox  />} label="Label" /> */}
+                            {(isCheckedYes === "yes") && !isAnniversaryDay(selectedDay) && <span> 🧡</span>}
+                        </span>
+                    </span>
+                }
+                {
+                    (selectedDay !== "" && selectedDay >= new Date(new Date().setDate(new Date().getDate() - 2))) &&
+                    <span>
                         <div className="checkbox-container">
                             <span>Would (Did) you dating on <br/>{makeDateToShortString(selectedDay)} 😊?</span>
                             <FormGroup style={{display:"block"}}>
@@ -208,6 +245,52 @@ function Calendar() {
                             <Button id="save-btn" size="small" onClick={onClickSaveBtn}>SAVE</Button>
                         </div>
                     </span>
+                }
+                {
+                    (selectedDay !== "") && 
+                    (selectedDay < new Date(new Date().setDate(new Date().getDate() - 2))) &&
+                    (isCheckedYes === "yes") && 
+                    <div className='memo-div'>
+                        <TextField
+                            style={{width:"80%"}}
+                            label="MEMO"
+                            multiline
+                            value={datingMemo}
+                            onChange={(e) => setDatingDayMemo(e.target.value)}
+                            InputProps={{
+                                endAdornment :
+                                <IconButton onClick={onTextSaveButton}>
+                                    <SaveIcon style={{color: "white"}}/>
+                                </IconButton>
+                            }}
+                            sx={{
+                                "& .MuiInputBase-root": {
+                                    color: 'white',
+                                    '& fieldset': {
+                                        borderColor: 'white',
+                                      },
+                                    '&:hover fieldset': {
+                                        borderColor: "white"
+                                    },
+                                },
+                                "& .MuiInputLabel-root" : {
+                                    color : 'white'
+                                },
+                                "& input": {
+                                    color: 'white'
+                                },
+                                "& .MuiFormLabel-root.Mui-focused": {
+                                    color: 'white',
+                                },
+                                '& .MuiFormLabel-root.Mui-disabled': {
+                                    color: 'white',
+                                },
+                                '& input:valid + fieldset' :{
+                                    borderColor: "white"
+                                }
+                            }}
+                        />
+                    </div>
                 }
             </div>
         </div>
