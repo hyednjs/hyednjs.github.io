@@ -176,7 +176,7 @@ function Calendar() {
 
     return (
         <div className="main">
-            <h1>🧞 🤍 👸🏼</h1>
+            <h1>🧡</h1>
             <div className="day-picker">
                 <DayPicker
                     mode="single"
@@ -212,47 +212,12 @@ function Calendar() {
                     </span>
                 }
                 {
-                    (selectedDay !== "" && selectedDay >= new Date(new Date().setDate(new Date().getDate() - 2))) &&
-                    <span>
-                        <div className="checkbox-container">
-                            <span>Would (Did) you dating on <br/>{makeDateToShortString(selectedDay)} 😊?</span>
-                            <FormGroup style={{display:"block"}}>
-                                <FormControlLabel 
-                                    control={
-                                        <Checkbox 
-                                            checked={isCheckedYes === "yes" ? true : false}
-                                            value="yes"
-                                            onChange={onChangeCheckbox}
-                                            style={{color:"#ffaa00"}}
-                                            icon={<FavoriteBorder />} 
-                                            checkedIcon={<Favorite />}
-                                            sx={{ '& .MuiSvgIcon-root': { fontSize: 30 } }}
-                                        />}
-                                    label="YES" />
-                                <FormControlLabel 
-                                    control={
-                                        <Checkbox 
-                                            checked={isCheckedYes === "no" ? true : false}
-                                            value="no"
-                                            onChange={onChangeCheckbox}
-                                            style={{color:"#ffaa00"}}
-                                            icon={<FavoriteBorder />} 
-                                            checkedIcon={<Favorite />}
-                                            sx={{ '& .MuiSvgIcon-root': { fontSize: 30 } }}
-                                        />}
-                                    label="NO" />
-                            </FormGroup>
-                            <Button id="save-btn" size="small" onClick={onClickSaveBtn}>SAVE</Button>
-                        </div>
-                    </span>
-                }
-                {
-                    (selectedDay !== "") && 
-                    (selectedDay < new Date(new Date().setDate(new Date().getDate() - 2))) &&
-                    (isCheckedYes === "yes") && 
+                    (selectedDay !== "") &&
+                    // (selectedDay < new Date(new Date().setDate(new Date().getDate() - 2))) &&
+                    (isCheckedYes === "yes") &&
                     <div className='memo-div'>
                         <TextField
-                            style={{width:"80%"}}
+                            style={{width:"80%", maxWidth:"270px"}}
                             label="MEMO"
                             multiline
                             value={datingMemo}
@@ -292,7 +257,45 @@ function Calendar() {
                         />
                     </div>
                 }
+                {
+                    (selectedDay !== "" && selectedDay >= new Date(new Date().setDate(new Date().getDate() - 2))) &&
+                    <span>
+                        <div className="checkbox-container">
+                            <span>Would (Did) you dating on <br/>{makeDateToShortString(selectedDay)} 😊?</span>
+                            <FormGroup style={{display:"block"}}>
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={isCheckedYes === "yes" ? true : false}
+                                            value="yes"
+                                            onChange={onChangeCheckbox}
+                                            style={{color:"#ffaa00"}}
+                                            icon={<FavoriteBorder />}
+                                            checkedIcon={<Favorite />}
+                                            sx={{ '& .MuiSvgIcon-root': { fontSize: 30 } }}
+                                        />}
+                                    label="YES" />
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={isCheckedYes === "no" ? true : false}
+                                            value="no"
+                                            onChange={onChangeCheckbox}
+                                            style={{color:"#ffaa00"}}
+                                            icon={<FavoriteBorder />}
+                                            checkedIcon={<Favorite />}
+                                            sx={{ '& .MuiSvgIcon-root': { fontSize: 30 } }}
+                                        />}
+                                    label="NO" />
+                            </FormGroup>
+                            <Button id="save-btn" size="small" onClick={onClickSaveBtn}>SAVE</Button>
+                        </div>
+                    </span>
+                }
             </div>
+            <footer>
+                <span>copyright © hyewon</span><br/>
+            </footer>
         </div>
       );
 }

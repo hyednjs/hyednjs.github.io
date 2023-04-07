@@ -34,7 +34,6 @@
     margin: auto;
     margin-top: 20px;
     padding: 5%;
-    margin-bottom: 100px;
 }
 
 .rdp {
@@ -72,5 +71,10 @@
 
 .memo-div {
     margin-top: 25px;
-    margin-bottom: 100px;
+    margin-bottom: 25px;
 }
+
+footer {
+    margin-top: 70px;
+    margin-bottom: 100px;
+  }
